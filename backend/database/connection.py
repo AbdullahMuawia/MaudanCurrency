@@ -3,11 +3,11 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 
 # Read the database URL from environment variable
-# Falls back to a local URL for development without Docker
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://maudan:REDACTED@localhost:5432/currencywise"
-)
+# Require this to be set so credentials are not embedded in code
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL is not set")
 
 # The engine is the actual connection to the database
 # pool_pre_ping=True checks if the connection is alive before using it
