@@ -9,8 +9,6 @@ services:
         fromDatabase:
           name: currencywise-db
           property: connectionString
-      - key: REDIS_URL
-        value: redis://localhost:6379
       - key: SECRET_KEY
         generateValue: true    # Render generates a random secret key for you
 
