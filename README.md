@@ -1,3 +1,5 @@
+![CI](https://github.com/YOUR_USERNAME/currencywise/actions/workflows/ci.yml/badge.svg)
+
 # Maudan Currency 💱
 
 Real-time currency converter built with FastAPI, vanilla JS, and Docker.
