@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaudanCurrency</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <h1>MaudanCurrency</h1>
+    <p class="subtitle">Real-time currenncy conversion</p>
+
+    <div class = "form_group">
+        <label>Amount</label>
+        <input type="number" id="amount" value = "100" min="0.01" step = "any"/> 
+    </div>
+
+    <div class = "row">
+        <div class ="form-group">
+            <label>From</label>
+            <select id = "from_currencyy"></select>
+        </div>
+        <button id=""swap-btn" title="Swap currencies">⇄</button>
+        <div class="form-group">
+            <label>To</label>
+            <select id="to_currency"></select>
+        </div>
+    </div>
+
+    <button id = "convert-btn">Convert</button>
+
+      <div id="result" class="result hidden">
+      <p id="result-text"></p>
+      <p id="rate-text" class="rate"></p>
+      <p id="timestamp" class="timestamp"></p>
+    </div>
+
+    <div id="error" class="error hidden"></div>
+  </div>
+
+  <script src="app.js"></script>
+    
+</body>
+</html>

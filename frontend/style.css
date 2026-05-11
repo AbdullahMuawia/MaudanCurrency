@@ -1,0 +1,98 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f172a;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 440px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+h1 { color: #f8fafc; font-size: 1.75rem; margin-bottom: 0.25rem; }
+.emoji { font-size: 1.5rem; }
+.subtitle { color: #94a3b8; margin-bottom: 1.5rem; font-size: 0.9rem; }
+
+.form-group { display: flex; flex-direction: column; gap: 0.4rem; flex: 1; }
+label { color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+
+input, select {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #f8fafc;
+  font-size: 1rem;
+  padding: 0.65rem 0.75rem;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+input:focus, select:focus { border-color: #38bdf8; outline: none; }
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+#swap-btn {
+  background: #334155;
+  border: none;
+  border-radius: 8px;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.65rem 0.75rem;
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+#swap-btn:hover { background: #38bdf8; color: #0f172a; }
+
+#convert-btn {
+  background: #38bdf8;
+  border: none;
+  border-radius: 8px;
+  color: #0f172a;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  transition: background 0.2s, transform 0.1s;
+  width: 100%;
+}
+#convert-btn:hover { background: #7dd3fc; }
+#convert-btn:active { transform: scale(0.98); }
+
+.result {
+  background: #0f172a;
+  border: 1px solid #38bdf8;
+  border-radius: 10px;
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+}
+#result-text { color: #f8fafc; font-size: 1.3rem; font-weight: 700; }
+.rate { color: #94a3b8; font-size: 0.85rem; margin-top: 0.35rem; }
+.timestamp { color: #475569; font-size: 0.75rem; margin-top: 0.2rem; }
+
+.error {
+  background: #450a0a;
+  border: 1px solid #dc2626;
+  border-radius: 10px;
+  color: #fca5a5;
+  font-size: 0.9rem;
+  margin-top: 1.25rem;
+  padding: 0.75rem 1rem;
+}
+
+.hidden { display: none; }

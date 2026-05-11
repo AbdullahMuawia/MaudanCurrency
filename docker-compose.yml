@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build: .
+    ports:
+      - "8000:8000"     # host:container
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  frontend:
+    image: nginx:alpine   # Nginx serves the static HTML/CSS/JS files
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html:ro
+    depends_on:
+      - backend
