@@ -95,3 +95,71 @@ function hideMessages() {
 
 convertBtn.addEventListener("click", convert);
 loadCurrencies();
+
+let historyChart = null;
+
+async function loadHistory() {
+  try {
+    const res  = await fetch(`${API_BASE}/history?limit=10`);
+    const data = await res.json();
+
+    if (data.items.length === 0) return;
+
+    // --- Build chart data ---
+    const labels  = data.items.map(i =>
+      `${i.from_currency}→${i.to_currency}`
+    ).reverse();
+
+    const amounts = data.items.map(i => i.converted_amount).reverse();
+
+    // If chart already exists, destroy it before redrawing
+    if (historyChart) historyChart.destroy();
+
+    const ctx = document.getElementById("historyChart").getContext("2d");
+    historyChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels,
+        datasets: [{
+          label: "Converted Amount",
+          data: amounts,
+          backgroundColor: "rgba(56, 189, 248, 0.6)",
+          borderColor: "#38bdf8",
+          borderWidth: 1,
+          borderRadius: 4,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { labels: { color: "#94a3b8" } }
+        },
+        scales: {
+          x: { ticks: { color: "#94a3b8" }, grid: { color: "#334155" } },
+          y: { ticks: { color: "#94a3b8" }, grid: { color: "#334155" } }
+        }
+      }
+    });
+
+    // --- Build list below chart ---
+    const listEl = document.getElementById("history-list");
+    listEl.innerHTML = data.items.map(i =>
+      `<div class="history-item">
+        ${i.amount} ${i.from_currency} → ${i.converted_amount} ${i.to_currency}
+        &nbsp;·&nbsp; ${new Date(i.created_at).toLocaleString()}
+      </div>`
+    ).join("");
+
+  } catch (e) {
+    console.error("Could not load history:", e);
+  }
+}
+
+// Reload history after every conversion
+const originalConvert = convert;
+convertBtn.addEventListener("click", async () => {
+  await loadHistory();
+});
+
+// Load history when page opens
+loadHistory();

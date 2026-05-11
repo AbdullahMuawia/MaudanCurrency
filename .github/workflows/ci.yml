@@ -11,21 +11,55 @@ jobs:
     name: Run Tests
     runs-on: ubuntu-latest
 
+    services:
+      # GitHub Actions can spin up Docker containers for your tests
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: maudan
+          POSTGRES_PASSWORD: REDACTED
+          POSTGRES_DB: currencywise
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.14.4"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
           cd backend
           pip install -r requirements.txt
 
-      - name: Run pytest
+      - name: Run tests
+        env:
+          DATABASE_URL: postgresql://maudan:REDACTED@localhost:5432/currencywise
+          REDIS_URL: redis://localhost:6379
+          SECRET_KEY: test-secret-key
         run: |
           cd backend
           pytest tests/ -v
+
+  docker-build:
+    name: Verify Docker Build
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t currencywise:test .
