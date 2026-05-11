@@ -1,4 +1,4 @@
-# CurrencyWise 💱
+# Maudan Currency 💱
 
 Real-time currency converter built with FastAPI, vanilla JS, and Docker.
 
