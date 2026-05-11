@@ -1,4 +1,4 @@
-const API_BASE = "https://currencywise-backend.onrender.com";
+const API_BASE = "https://currencywise-backend.onrender.com/api";
 
 const amountInput   = document.getElementById("amount");
 const fromSelect    = document.getElementById("from-currency");
