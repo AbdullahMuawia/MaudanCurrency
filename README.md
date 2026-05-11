@@ -2,6 +2,7 @@
 
 # Maudan Currency 💱
 
+
 Real-time currency converter built with FastAPI, vanilla JS, and Docker.
 
 ![CI](https://github.com/YOUR_USERNAME/currencywise/actions/workflows/ci.yml/badge.svg)
@@ -44,3 +45,6 @@ cd backend && pytest tests/ -v
 | POST | /api/convert | Convert between currencies |
 | GET | /api/currencies | List all supported currencies |
 | GET | /health | Health check |
+
+
+I use this project for personal use as well since I do a lot of currency conversions, so I might as well create my own for checking currencies quickly.
